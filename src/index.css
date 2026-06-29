@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Futuristic 3D Parallax Resume - Design System */
+
+@layer base {
+  :root {
+    /* Space/Cyberpunk Color Palette */
+    --background: 222 47% 4%;
+    --foreground: 210 40% 98%;
+
+    --card: 223 40% 8%;
+    --card-foreground: 210 40% 98%;
+    --card-glow: 193 100% 50%;
+
+    --popover: 223 40% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Electric Cyan Primary */
+    --primary: 193 100% 50%;
+    --primary-foreground: 222 47% 4%;
+    --primary-glow: 193 100% 60%;
+
+    /* Deep Purple Secondary */
+    --secondary: 263 70% 50%;
+    --secondary-foreground: 210 40% 98%;
+    --secondary-glow: 263 70% 60%;
+
+    --muted: 223 30% 15%;
+    --muted-foreground: 215 20% 65%;
+
+    /* Neon Accent */
+    --accent: 290 100% 60%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 223 30% 20%;
+    --input: 223 30% 18%;
+    --ring: 193 100% 50%;
+
+    --radius: 1rem;
+
+    /* Gradient Tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(193 100% 50% / 0.2), hsl(263 70% 50% / 0.2));
+    --gradient-hero: linear-gradient(135deg, hsl(193 100% 50% / 0.1) 0%, hsl(263 70% 50% / 0.1) 50%, hsl(290 100% 60% / 0.1) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(223 40% 10%) 0%, hsl(223 40% 6%) 100%);
+    --gradient-mesh: radial-gradient(at 0% 0%, hsl(193 100% 50% / 0.2) 0px, transparent 50%),
+                     radial-gradient(at 100% 0%, hsl(263 70% 50% / 0.2) 0px, transparent 50%),
+                     radial-gradient(at 100% 100%, hsl(290 100% 60% / 0.2) 0px, transparent 50%),
+                     radial-gradient(at 0% 100%, hsl(193 100% 50% / 0.1) 0px, transparent 50%);
+
+    /* Shadow & Glow Effects */
+    --shadow-glow: 0 0 60px -15px hsl(var(--primary-glow) / 0.5);
+    --shadow-card: 0 20px 60px -15px hsl(222 47% 4% / 0.6);
+    --shadow-intense: 0 0 80px -10px hsl(var(--primary-glow) / 0.8),
+                      0 0 120px -20px hsl(var(--secondary-glow) / 0.4);
+
+    /* Animation Tokens */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-image: var(--gradient-mesh);
+    background-attachment: fixed;
+  }
+
+  /* Smooth Scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.5);
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.8);
+  }
+}
+
+@layer utilities {
+  /* Text Glow Effects */
+  .text-glow {
+    text-shadow: 0 0 20px hsl(var(--primary-glow) / 0.5);
+  }
+
+  .text-glow-intense {
+    text-shadow: 0 0 30px hsl(var(--primary-glow) / 0.8),
+                 0 0 60px hsl(var(--primary-glow) / 0.4);
+  }
+
+  /* Card Glow Effect */
+  .card-glow {
+    box-shadow: var(--shadow-glow);
+    transition: var(--transition-smooth);
+  }
+
+  .card-glow:hover {
+    box-shadow: var(--shadow-intense);
+    transform: translateY(-8px);
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Parallax Layers */
+  .parallax-layer {
+    transition: transform 0.1s ease-out;
+    will-change: transform;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
