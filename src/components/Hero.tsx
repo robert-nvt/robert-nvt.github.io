@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Download, Github, Linkedin, Mail } from "lucide-react";
+import { Apple, Download, Github, Linkedin, Mail } from "lucide-react";
 import heroBackground from "@/assets/hero-bg.jpg";
-import { profile } from "@/data/resume";
+import { appStore, profile } from "@/data/resume";
 
 export const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -126,6 +126,16 @@ export const Hero = () => {
                 className="p-3 rounded-full bg-card border border-border hover:border-primary hover:bg-primary/10 transition-all hover:scale-110"
               >
                 <Mail className="h-6 w-6" />
+              </a>
+              <a
+                href={appStore.developerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Apps on the App Store"
+                title="Apps on the App Store"
+                className="p-3 rounded-full bg-card border border-border hover:border-primary hover:bg-primary/10 transition-all hover:scale-110"
+              >
+                <Apple className="h-6 w-6" />
               </a>
             </div>
           </div>

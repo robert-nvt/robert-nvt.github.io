@@ -1,5 +1,5 @@
-import { Github, Linkedin, Mail } from "lucide-react";
-import { footer, profile } from "@/data/resume";
+import { Apple, Github, Linkedin, Mail } from "lucide-react";
+import { appStore, footer, profile } from "@/data/resume";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -55,6 +55,16 @@ export const Footer = () => {
                 className="p-3 rounded-full bg-card border border-primary/30 hover:border-primary hover:bg-primary/10 transition-all hover:scale-110"
               >
                 <Mail className="w-5 h-5" />
+              </a>
+              <a
+                href={appStore.developerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Apps on the App Store"
+                title="Apps on the App Store"
+                className="p-3 rounded-full bg-card border border-primary/30 hover:border-primary hover:bg-primary/10 transition-all hover:scale-110"
+              >
+                <Apple className="w-5 h-5" />
               </a>
             </div>
           </div>

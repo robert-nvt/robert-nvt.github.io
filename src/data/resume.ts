@@ -295,6 +295,37 @@ export const projects: Project[] = [
   },
 ];
 
+/* ------------------------------ APPS ------------------------------- */
+export const appStore = {
+  heading: "Mobile Apps",
+  subheading: "Native iOS apps I designed, built and published on the App Store",
+  developerName: "Nguyen Viet Tri",
+  developerUrl: "https://apps.apple.com/us/developer/nguyen-viet-tri/id6780534675",
+};
+export type AppItem = {
+  name: string;
+  tagline: string;
+  description: string;
+  category: string;
+  price: string;
+  platform: string;
+  tags: string[];
+  url: string;
+};
+export const apps: AppItem[] = [
+  {
+    name: "Gia Phả Đất Việt",
+    tagline: "Kết nối các thế hệ, gìn giữ cội nguồn cho con cháu mai sau",
+    description:
+      "A Vietnamese family-tree app to build and preserve multi-generational genealogy. Create interactive lineage records with detailed profiles, manage family relationships and share with customizable privacy controls.",
+    category: "Lifestyle",
+    price: "Free",
+    platform: "iOS",
+    tags: ["iOS", "Swift", "Genealogy", "Family Tree"],
+    url: "https://apps.apple.com/us/app/gia-pha-dat-viet/id6780534673",
+  },
+];
+
 /* ----------------------------- SKILLS ------------------------------ */
 export type SkillCategory = {
   icon: LucideIcon;
@@ -454,6 +485,7 @@ export const navItems = [
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
+  { label: "Apps", href: "#apps" },
   { label: "Skills", href: "#skills" },
   { label: "Education", href: "#education" },
   { label: "Awards", href: "#awards" },
