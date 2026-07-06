@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Apple, Github, Linkedin, Mail } from "lucide-react";
 import { appStore, footer, profile } from "@/data/resume";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [showNativeName, setShowNativeName] = useState(false);
 
   return (
     <footer className="relative py-12 px-6 border-t border-primary/20">
@@ -10,7 +12,13 @@ export const Footer = () => {
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
           <div>
-            <h3 className="text-2xl font-bold gradient-text mb-4">{profile.name}</h3>
+            <h3
+              onMouseEnter={() => setShowNativeName(true)}
+              onMouseLeave={() => setShowNativeName(false)}
+              className="text-2xl font-bold gradient-text mb-4 cursor-default"
+            >
+              {showNativeName ? profile.nameNative : profile.name}
+            </h3>
             <p className="text-muted-foreground">
               {footer.blurb}
             </p>

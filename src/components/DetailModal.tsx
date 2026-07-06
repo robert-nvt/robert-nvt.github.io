@@ -1,13 +1,27 @@
-import { useEffect } from "react";
-import { Briefcase, Calendar, ChevronLeft, ChevronRight, ExternalLink, Users, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import {
+  Briefcase,
+  Calendar,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  ExternalLink,
+  Image as ImageIcon,
+  Info,
+  Users,
+  X,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export type ModalItem = {
   image?: string;
+  screenshots?: string[];
   title: string;
   subtitle?: string;
   period?: string;
   description?: string;
+  about?: string;
+  features?: string[];
   badges?: string[];
   bulletsTitle?: string;
   bullets?: string[];
@@ -27,6 +41,15 @@ type DetailModalProps = {
 export const DetailModal = ({ items, index, onClose, onNavigate }: DetailModalProps) => {
   const isOpen = index !== null && index >= 0 && index < items.length;
   const item = isOpen ? items[index] : null;
+  const shots = item?.screenshots ?? [];
+  const [heroIndex, setHeroIndex] = useState(0);
+  const [shotIndex, setShotIndex] = useState<number | null>(null);
+
+  // Reset carousel & lightbox whenever the modal changes item or closes
+  useEffect(() => {
+    setHeroIndex(0);
+    setShotIndex(null);
+  }, [index]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -35,6 +58,15 @@ export const DetailModal = ({ items, index, onClose, onNavigate }: DetailModalPr
     document.body.style.overflow = "hidden";
 
     const handleKeyDown = (e: KeyboardEvent) => {
+      // While the screenshot lightbox is open, keys control it instead of the modal
+      if (shotIndex !== null) {
+        if (e.key === "Escape") {
+          setHeroIndex(shotIndex);
+          setShotIndex(null);
+        } else if (e.key === "ArrowLeft" && shotIndex > 0) setShotIndex(shotIndex - 1);
+        else if (e.key === "ArrowRight" && shotIndex < shots.length - 1) setShotIndex(shotIndex + 1);
+        return;
+      }
       if (e.key === "Escape") onClose();
       else if (e.key === "ArrowLeft" && index! > 0) onNavigate(index! - 1);
       else if (e.key === "ArrowRight" && index! < items.length - 1) onNavigate(index! + 1);
@@ -45,7 +77,7 @@ export const DetailModal = ({ items, index, onClose, onNavigate }: DetailModalPr
       document.body.style.overflow = originalOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen, index, items.length, onClose, onNavigate]);
+  }, [isOpen, index, items.length, onClose, onNavigate, shotIndex, shots.length]);
 
   if (!isOpen || !item) return null;
 
@@ -95,7 +127,72 @@ export const DetailModal = ({ items, index, onClose, onNavigate }: DetailModalPr
         </button>
 
         {/* Image header */}
-        {item.image ? (
+        {shots.length > 0 ? (
+          /* Carousel header: main shot + counter + arrows + thumbnail film strip */
+          <div className="relative w-full h-64 md:h-96 overflow-hidden rounded-t-3xl bg-background">
+            <img
+              src={shots[heroIndex]}
+              alt={`${item.title} screenshot ${heroIndex + 1}`}
+              onClick={() => setShotIndex(heroIndex)}
+              className="w-full h-full object-cover object-top cursor-zoom-in"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent pointer-events-none" />
+
+            {/* Counter + period */}
+            <div className="absolute top-4 left-4 flex items-center gap-2">
+              <div className="px-3.5 py-1.5 rounded-full bg-background/70 backdrop-blur-md border border-primary/30 text-foreground text-sm font-semibold flex items-center gap-2">
+                <ImageIcon className="w-4 h-4 text-primary" />
+                {heroIndex + 1} / {shots.length}
+              </div>
+              {item.period && (
+                <div className="px-3.5 py-1.5 rounded-full bg-background/70 backdrop-blur-md border border-primary/30 text-primary text-sm font-medium flex items-center gap-2">
+                  <Calendar className="w-4 h-4" />
+                  {item.period}
+                </div>
+              )}
+            </div>
+
+            {/* Carousel arrows */}
+            {shots.length > 1 && (
+              <>
+                <button
+                  onClick={() => setHeroIndex((heroIndex - 1 + shots.length) % shots.length)}
+                  aria-label="Previous screenshot"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-background/60 hover:bg-background border border-primary/30 backdrop-blur-md transition-all group/arrow"
+                >
+                  <ChevronLeft className="w-5 h-5 text-foreground group-hover/arrow:-translate-x-0.5 transition-transform" />
+                </button>
+                <button
+                  onClick={() => setHeroIndex((heroIndex + 1) % shots.length)}
+                  aria-label="Next screenshot"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-background/60 hover:bg-background border border-primary/30 backdrop-blur-md transition-all group/arrow"
+                >
+                  <ChevronRight className="w-5 h-5 text-foreground group-hover/arrow:translate-x-0.5 transition-transform" />
+                </button>
+              </>
+            )}
+
+            {/* Thumbnail film strip */}
+            {shots.length > 1 && (
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 px-3 py-2 rounded-2xl bg-background/70 backdrop-blur-md border border-primary/20 max-w-[85%] overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {shots.map((src, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setHeroIndex(i)}
+                    aria-label={`Screenshot ${i + 1}`}
+                    className={`shrink-0 w-20 h-12 rounded-lg overflow-hidden border-2 transition-all ${
+                      i === heroIndex
+                        ? "border-primary shadow-[0_0_10px_hsl(var(--primary)/0.5)]"
+                        : "border-transparent opacity-50 hover:opacity-100"
+                    }`}
+                  >
+                    <img src={src} alt="" loading="lazy" className="w-full h-full object-cover object-top" />
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        ) : item.image ? (
           <div className="relative w-full h-56 md:h-72 overflow-hidden rounded-t-3xl bg-background">
             <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent" />
@@ -143,6 +240,35 @@ export const DetailModal = ({ items, index, onClose, onNavigate }: DetailModalPr
           {/* Description */}
           {item.description && (
             <p className="text-muted-foreground leading-relaxed mb-6">{item.description}</p>
+          )}
+
+          {/* About This Project */}
+          {item.about && (
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold text-foreground mb-3 flex items-center gap-2">
+                <Info className="w-5 h-5 text-primary" />
+                About This Project
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">{item.about}</p>
+            </div>
+          )}
+
+          {/* Key Features */}
+          {item.features && item.features.length > 0 && (
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold text-foreground mb-3 flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-primary" />
+                Key Features
+              </h3>
+              <div className="grid sm:grid-cols-2 gap-x-8 gap-y-3">
+                {item.features.map((feature, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <span className="text-primary mt-0.5 font-bold shrink-0">✓</span>
+                    <span className="text-muted-foreground text-sm leading-relaxed">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           )}
 
           {/* Bullets (achievements / highlights) */}
@@ -228,6 +354,100 @@ export const DetailModal = ({ items, index, onClose, onNavigate }: DetailModalPr
           )}
         </div>
       </div>
+
+      {/* Fullscreen screenshot lightbox */}
+      {shotIndex !== null && shots.length > 0 && (
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            setHeroIndex(shotIndex);
+            setShotIndex(null);
+          }}
+          className="fixed inset-0 z-[80] bg-black/95 backdrop-blur-md flex flex-col animate-in fade-in duration-200"
+        >
+          {/* Counter */}
+          <div className="absolute top-4 left-4 z-10 flex items-center gap-2 px-4 py-2 rounded-full bg-card/70 border border-primary/30 backdrop-blur-md text-foreground text-sm font-semibold">
+            <ImageIcon className="w-4 h-4 text-primary" />
+            {shotIndex + 1} / {shots.length}
+          </div>
+
+          {/* Close */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setHeroIndex(shotIndex);
+              setShotIndex(null);
+            }}
+            aria-label="Close screenshots"
+            className="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center rounded-full bg-card/70 hover:bg-card border border-primary/30 backdrop-blur-md transition-all group"
+          >
+            <X className="w-5 h-5 text-foreground group-hover:rotate-90 transition-transform duration-200" />
+          </button>
+
+          {/* Prev / Next screenshot */}
+          {shots.length > 1 && (
+            <>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (shotIndex > 0) setShotIndex(shotIndex - 1);
+                }}
+                disabled={shotIndex === 0}
+                aria-label="Previous screenshot"
+                className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-card/70 hover:bg-card border border-primary/30 backdrop-blur-md transition-all disabled:opacity-30 disabled:cursor-default group"
+              >
+                <ChevronLeft className="w-7 h-7 text-foreground group-hover:-translate-x-0.5 transition-transform" />
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (shotIndex < shots.length - 1) setShotIndex(shotIndex + 1);
+                }}
+                disabled={shotIndex === shots.length - 1}
+                aria-label="Next screenshot"
+                className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-card/70 hover:bg-card border border-primary/30 backdrop-blur-md transition-all disabled:opacity-30 disabled:cursor-default group"
+              >
+                <ChevronRight className="w-7 h-7 text-foreground group-hover:translate-x-0.5 transition-transform" />
+              </button>
+            </>
+          )}
+
+          {/* Main image */}
+          <div className="flex-1 flex items-center justify-center px-14 md:px-20 pt-16 pb-4 min-h-0">
+            <img
+              src={shots[shotIndex]}
+              alt={`${item.title} screenshot ${shotIndex + 1}`}
+              onClick={(e) => e.stopPropagation()}
+              className="max-w-full max-h-full object-contain rounded-xl border border-primary/20 shadow-2xl"
+            />
+          </div>
+
+          {/* Thumbnail strip */}
+          {shots.length > 1 && (
+            <div className="pb-6 pt-2 flex justify-center">
+              <div
+                onClick={(e) => e.stopPropagation()}
+                className="flex gap-3 px-4 py-3 rounded-2xl bg-card/60 border border-primary/20 backdrop-blur-md overflow-x-auto max-w-[90vw]"
+              >
+                {shots.map((src, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setShotIndex(i)}
+                    aria-label={`Screenshot ${i + 1}`}
+                    className={`shrink-0 w-24 h-16 rounded-lg overflow-hidden border-2 transition-all ${
+                      i === shotIndex
+                        ? "border-primary shadow-[0_0_12px_hsl(var(--primary)/0.5)]"
+                        : "border-transparent opacity-50 hover:opacity-100"
+                    }`}
+                  >
+                    <img src={src} alt="" loading="lazy" className="w-full h-full object-cover object-top" />
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

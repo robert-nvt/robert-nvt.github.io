@@ -37,8 +37,16 @@ export const Apps = () => {
             >
               {/* Icon + meta */}
               <div className="flex items-start justify-between mb-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 border border-primary/30 text-primary">
-                  <Apple className="w-7 h-7" />
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 border border-primary/30 text-primary overflow-hidden">
+                  {app.image ? (
+                    <img
+                      src={app.image}
+                      alt={`${app.name} icon`}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <Apple className="w-7 h-7" />
+                  )}
                 </div>
                 <div className="flex flex-col items-end gap-1.5">
                   <span className="px-3 py-1 text-xs rounded-full bg-background/70 backdrop-blur-md border border-primary/30 text-primary font-medium">

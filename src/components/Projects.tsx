@@ -6,10 +6,13 @@ import { projects } from "@/data/resume";
 
 const projectModalItems: ModalItem[] = projects.map((p) => ({
   image: p.image,
+  screenshots: p.screenshots,
   title: p.title,
   subtitle: p.role,
   period: p.period,
-  description: p.description,
+  description: p.about ? undefined : p.description,
+  about: p.about,
+  features: p.keyFeatures,
   badges: p.tags,
   meta: p.team ? [{ label: "Team Size", value: `${p.team} devs` }] : undefined,
   links: p.links,
@@ -57,7 +60,7 @@ export const Projects = () => {
               <span className="gradient-text text-glow">Featured Projects</span>
             </h2>
             <p className="text-muted-foreground text-lg">
-              Blockchain, DeFi, NFT and AI-driven commerce products I helped build
+              Full-stack system design and commerce platforms, alongside Blockchain, DeFi and NFT products I helped build
             </p>
           </div>
 

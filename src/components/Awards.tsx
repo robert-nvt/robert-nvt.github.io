@@ -1,10 +1,20 @@
 import { useEffect, useRef, useState } from "react";
-import { Award as AwardIcon, ExternalLink, Sparkles } from "lucide-react";
+import { Award as AwardIcon, ExternalLink, ImageIcon, Sparkles, X } from "lucide-react";
 import { awards, otherSkills } from "@/data/resume";
 
 export const Awards = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [certificate, setCertificate] = useState<{ title: string; image: string } | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!certificate) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setCertificate(null);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [certificate]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -47,7 +57,14 @@ export const Awards = () => {
               {awards.map((award, index) => (
                 <div
                   key={index}
-                  className="flex items-start justify-between gap-4 p-5 rounded-xl bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-xl border border-primary/30 card-glow hover:border-primary/60 transition-all"
+                  onClick={
+                    award.image
+                      ? () => setCertificate({ title: award.title, image: award.image! })
+                      : undefined
+                  }
+                  className={`flex items-start justify-between gap-4 p-5 rounded-xl bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-xl border border-primary/30 card-glow hover:border-primary/60 transition-all ${
+                    award.image ? "cursor-pointer" : ""
+                  }`}
                 >
                   <div>
                     <p className="text-foreground font-semibold">{award.title}</p>
@@ -61,6 +78,12 @@ export const Awards = () => {
                         <ExternalLink className="w-3.5 h-3.5 shrink-0" />
                         View
                       </a>
+                    )}
+                    {award.image && (
+                      <span className="inline-flex items-center gap-1 mt-1 text-sm text-muted-foreground group-hover:text-primary transition-colors">
+                        <ImageIcon className="w-3.5 h-3.5 shrink-0" />
+                        View certificate
+                      </span>
                     )}
                   </div>
                   <span className="shrink-0 text-sm text-primary font-medium whitespace-nowrap">
@@ -97,6 +120,35 @@ export const Awards = () => {
           </div>
         </div>
       </div>
+
+      {/* Certificate lightbox */}
+      {certificate && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-background/90 backdrop-blur-md"
+          onClick={() => setCertificate(null)}
+        >
+          <div
+            className="relative max-w-3xl w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setCertificate(null)}
+              className="absolute -top-3 -right-3 z-10 p-2 rounded-full bg-card border border-primary/40 text-foreground hover:text-primary hover:border-primary transition-colors"
+              aria-label="Close"
+            >
+              <X className="w-4 h-4" />
+            </button>
+            <img
+              src={certificate.image}
+              alt={certificate.title}
+              className="w-full max-h-[80vh] object-contain rounded-xl border border-primary/30 bg-card"
+            />
+            <p className="mt-3 text-center text-sm text-muted-foreground">
+              {certificate.title}
+            </p>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

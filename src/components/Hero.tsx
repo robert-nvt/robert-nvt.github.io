@@ -7,6 +7,7 @@ import { appStore, profile } from "@/data/resume";
 export const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
+  const [showNativeName, setShowNativeName] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
@@ -72,7 +73,13 @@ export const Hero = () => {
             <div className="space-y-2">
               <p className="text-primary text-lg font-medium">{profile.greeting}</p>
               <h1 className="text-5xl md:text-7xl font-bold">
-                <span className="gradient-text text-glow-intense">{profile.name}</span>
+                <span
+                  onMouseEnter={() => setShowNativeName(true)}
+                  onMouseLeave={() => setShowNativeName(false)}
+                  className="gradient-text text-glow-intense cursor-default transition-all duration-300"
+                >
+                  {showNativeName ? profile.nameNative : profile.name}
+                </span>
               </h1>
               <h2 className="text-3xl md:text-4xl font-semibold text-muted-foreground">
                 {profile.title}
