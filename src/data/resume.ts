@@ -464,8 +464,9 @@ export type AppItem = {
   price: string;
   platform: string;
   tags: string[];
-  url: string;
+  url?: string;
   image?: string;
+  comingSoon?: boolean;
 };
 export const apps: AppItem[] = [
   {
@@ -479,6 +480,17 @@ export const apps: AppItem[] = [
     tags: ["iOS", "React Native", "Genealogy", "Family Tree"],
     url: "https://apps.apple.com/us/app/gia-pha-dat-viet/id6780534673",
     image: giaPhaDatVietIcon,
+  },
+  {
+    name: "XuXu",
+    tagline: "Hoàn tiền mua sắm đến 20% — Shopee, TikTok Shop, Lazada, Tiki",
+    description:
+      "A cashback & affiliate shopping app — paste a product link from Shopee, TikTok Shop, Lazada or Tiki and earn cashback on every purchase. Coins, vouchers, daily check-in streaks, lucky wheel, referral rewards and VIP tiers.",
+    category: "Shopping",
+    price: "Free",
+    platform: "iOS",
+    tags: ["React Native", "Cashback", "Affiliate", "E-commerce"],
+    comingSoon: true,
   },
 ];
 

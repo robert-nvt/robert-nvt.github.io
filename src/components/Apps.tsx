@@ -1,5 +1,6 @@
-import { Apple, ExternalLink, Tag } from "lucide-react";
+import { Apple, Clock, ExternalLink, Tag } from "lucide-react";
 import { apps, appStore } from "@/data/resume";
+import { toast } from "@/hooks/use-toast";
 
 export const Apps = () => {
   return (
@@ -30,10 +31,21 @@ export const Apps = () => {
           {apps.map((app, index) => (
             <a
               key={index}
-              href={app.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group h-full flex flex-col rounded-2xl bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-xl border border-primary/30 overflow-hidden p-6 transition-all duration-500 hover:border-primary/60 hover:card-glow hover:-translate-y-1"
+              href={app.comingSoon ? "#apps" : app.url}
+              target={app.comingSoon ? undefined : "_blank"}
+              rel={app.comingSoon ? undefined : "noopener noreferrer"}
+              onClick={
+                app.comingSoon
+                  ? (e) => {
+                      e.preventDefault();
+                      toast({
+                        title: "🚀 Coming soon",
+                        description: `${app.name} is launching soon — stay tuned!`,
+                      });
+                    }
+                  : undefined
+              }
+              className="group h-full flex flex-col rounded-2xl bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-xl border border-primary/30 overflow-hidden p-6 transition-all duration-500 hover:border-primary/60 hover:card-glow hover:-translate-y-1 cursor-pointer"
             >
               {/* Icon + meta */}
               <div className="flex items-start justify-between mb-4">
@@ -49,9 +61,16 @@ export const Apps = () => {
                   )}
                 </div>
                 <div className="flex flex-col items-end gap-1.5">
-                  <span className="px-3 py-1 text-xs rounded-full bg-background/70 backdrop-blur-md border border-primary/30 text-primary font-medium">
-                    {app.platform}
-                  </span>
+                  {app.comingSoon ? (
+                    <span className="inline-flex items-center gap-1 px-3 py-1 text-xs rounded-full bg-secondary/20 backdrop-blur-md border border-secondary/50 text-secondary-foreground font-semibold animate-pulse">
+                      <Clock className="w-3 h-3" />
+                      Coming Soon
+                    </span>
+                  ) : (
+                    <span className="px-3 py-1 text-xs rounded-full bg-background/70 backdrop-blur-md border border-primary/30 text-primary font-medium">
+                      {app.platform}
+                    </span>
+                  )}
                   <span className="text-xs text-muted-foreground">
                     {app.category} · {app.price}
                   </span>
@@ -86,8 +105,17 @@ export const Apps = () => {
 
               {/* CTA */}
               <span className="inline-flex items-center gap-1 text-sm text-muted-foreground group-hover:text-primary transition-colors mt-auto">
-                <ExternalLink className="w-3.5 h-3.5" />
-                Download on the App Store
+                {app.comingSoon ? (
+                  <>
+                    <Clock className="w-3.5 h-3.5" />
+                    Coming soon to the App Store
+                  </>
+                ) : (
+                  <>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    Download on the App Store
+                  </>
+                )}
               </span>
             </a>
           ))}
