@@ -6,7 +6,7 @@
 import { Boxes, Code2, Database, Network, Server, Sparkles, Wallet } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-import cvFile from "@/files/cv.pdf";
+import cvFile from "@/files/Nguyen-Viet-Tri-CV.pdf";
 import profileImage from "@/assets/profile.jpg";
 import project1 from "@/assets/project1.jpg";
 import project2 from "@/assets/project2.jpg";
@@ -93,7 +93,7 @@ export const experiences: Experience[] = [
   {
     title: "Fullstack Developer",
     company: "PENGUIN SECRET AGENCY CO., LTD",
-    period: "11/2025 - 5/2026",
+    period: "10/2025 - 6/2026",
     achievements: [
       "Applied AI-First development workflows to accelerate software delivery, debugging, architecture design, and code reviews.",
       "Developed scalable full-stack commerce and payment infrastructure for AI-driven commerce platforms.",
@@ -109,13 +109,13 @@ export const experiences: Experience[] = [
       { label: "Database", value: "PostgreSQL, Redis" },
       { label: "Payment Infrastructure", value: "Stripe Connect, Paypal, Authorize.net, Airwallex, Checkout.com" },
       { label: "AI Engineering", value: "Claude, ChatGPT, Cursor, MCP (Model Context Protocol), AI Agents, Prompt Engineering" },
-      { label: "Architecture & Tools", value: "REST API, Webhooks, Docker, AWS, Prisma ORM, GraphQL,Queue Systems, Message Brokers" },
+      { label: "Architecture & Tools", value: "REST API, Webhooks, Docker, AWS, Prisma ORM, GraphQL,Queue Systems, Message Brokers,WebSocket" },
     ],
   },
   {
     title: "FullStack Developer - Blockchain Engineer",
     company: "MEEY GROUP JSC",
-    period: "11/2025 - 6/2026",
+    period: "11/2025 - 5/2026",
     achievements: [
       "Designed and developed end-to-end decentralized applications (dApps) within an RWA (Real World Assets) ecosystem, focusing on real estate tokenization (Property Token Offering – PTO).",
       "Developed and maintained smart contracts for core modules including asset tokenization, NFT standards, marketplace, staking, vesting, and governance mechanisms (ERC-20, ERC-721, ERC-3643, ERC-1400, etc., and custom implementations).",
@@ -136,7 +136,7 @@ export const experiences: Experience[] = [
       { label: "Web3", value: "Web3.js, Ethers.js, Viem" },
       { label: "Networks", value: "Ethereum, Base, etc." },
       { label: "Audit", value: "Certik, SolidProof / TrustNet" },
-      { label: "Architecture & Tools", value: "REST API, Webhooks, Docker, Subgraph/Indexing" },
+      { label: "Architecture & Tools", value: "REST API, Webhooks, Docker, Subgraph/Indexing, WebSocket" },
     ],
   },
   {
@@ -161,7 +161,7 @@ export const experiences: Experience[] = [
       { label: "Database", value: "PostgreSQL" },
       { label: "Web3", value: "Web3.js, Ethers.js" },
       { label: "Networks", value: "Ethereum, Polygon, BSC, Sui, Starknet, Solana, etc." },
-      { label: "Architecture & Tools", value: "REST API, Docker, AWS, Subgraph" },
+      { label: "Architecture & Tools", value: "REST API, Docker, AWS, Subgraph, WebSocket" },
     ],
   },
   {
