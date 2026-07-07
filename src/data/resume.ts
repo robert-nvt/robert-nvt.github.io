@@ -105,7 +105,7 @@ export const experiences: Experience[] = [
     ],
     techStack: [
       { label: "Frontend", value: "TypeScript, Next.js, React" },
-      { label: "Backend", value: "Node.js, Nest.js, Python (FastAPI)" },
+      { label: "Backend", value: "Node.js, Nest.js, Python (FastAPI), Go" },
       { label: "Database", value: "PostgreSQL, Redis" },
       { label: "Payment Infrastructure", value: "Stripe Connect, Paypal, Authorize.net, Airwallex, Checkout.com" },
       { label: "AI Engineering", value: "Claude, ChatGPT, Cursor, MCP (Model Context Protocol), AI Agents, Prompt Engineering" },
