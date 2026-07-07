@@ -34,7 +34,7 @@ export const profile = {
   title: "FullStack Developer & Blockchain Engineer",
   greeting: "Hello, I'm",
   tagline:
-    "Building scalable full-stack products with strong system design — event-driven architectures, message queues and payment infrastructure. Specialized in Node.js, Next.js and TypeScript, with deep blockchain experience (Solidity, RWA, DeFi, NFT).",
+    "Building scalable full-stack products with strong system design — event-driven architectures, message queues and payment infrastructure. Deep blockchain experience with Solidity, RWA, DeFi and NFT.",
   email: "tri.nv.cntt@gmail.com",
   phone: "0383087803",
   phoneHref: "tel:+84383087803",
@@ -52,9 +52,9 @@ export const about = {
   heading: "Career Objective",
   subheading:
     "FullStack & Blockchain Developer focused on scalable, real-world products",
-  cardTitle: "Blockchain, Fintech, Commerce & System Design Builder",
+  cardTitle: "Fintech, Blockchain, Commerce & System Design Builder",
   paragraphs: [
-    "My goal is to grow as a FullStack Developer with a strong foundation in system design, building scalable products across cryptocurrency, blockchain technology, and modern e-commerce with real-world impact.",
+    "My goal is to grow as a FullStack Developer with a strong foundation in system design, building scalable products across cryptocurrency, blockchain technology, and modern e-commerce — delivering real-world impact and driving Digital Transformation for businesses.",
     "I aim to research and develop practical applications of Blockchain, payment infrastructure, and digital commerce solutions — leveraging event-driven architectures and message queues (Kafka, RabbitMQ, Redis) to improve how people transact, interact, and manage value online.",
     "Through this journey, I hope to deepen my expertise in distributed systems, high-throughput system design, fintech, and commerce technologies while continuously improving my teamwork, leadership, and product development skills.",
   ],
@@ -66,7 +66,7 @@ export const about = {
     "Global payment infrastructure (Stripe, Paypal, Airwallex, Checkout.com)",
     "Smart contracts in Solidity, Rust, Move & Cairo across many chains",
     "RWA, DeFi, NFT Marketplace, Launchpad & DEX experience",
-    "AI-First development workflows with Claude, Cursor & MCP",
+    "AI-First development workflows with Claude, Codex, Cursor & MCP",
   ],
 };
 
@@ -100,11 +100,11 @@ export const experiences: Experience[] = [
       "Integrated global payment systems using Stripe Connect, Authorize.net, Airwallex, and Checkout.com for onboarding, payouts, and checkout processing.",
       "Built secure checkout, recurring billing, subscription management, and transaction monitoring systems.",
       "Developed merchant/store management platforms and commerce tools similar to Shopify for orders, products, and payment operations.",
-      "Designed RESTful APIs, webhook services, and event-driven architectures for payment and order synchronization.",
+      "Built and integrated RESTful APIs, webhook services, and event-driven architectures for payment and order synchronization.",
       "Optimized backend systems for scalability, reliability, and high-volume transaction processing.",
     ],
     techStack: [
-      { label: "Frontend", value: "TypeScript, Next.js" },
+      { label: "Frontend", value: "TypeScript, Next.js, React" },
       { label: "Backend", value: "Node.js, Nest.js, Python (FastAPI)" },
       { label: "Database", value: "PostgreSQL, Redis" },
       { label: "Payment Infrastructure", value: "Stripe Connect, Paypal, Authorize.net, Airwallex, Checkout.com" },
@@ -118,8 +118,9 @@ export const experiences: Experience[] = [
     period: "11/2025 - 6/2026",
     achievements: [
       "Designed and developed end-to-end decentralized applications (dApps) within an RWA (Real World Assets) ecosystem, focusing on real estate tokenization (Property Token Offering – PTO).",
-      "Developed and maintained smart contracts for core modules including asset tokenization, NFT standards, marketplace, staking, vesting, and governance mechanisms (ERC-20, ERC-721, and custom implementations).",
+      "Developed and maintained smart contracts for core modules including asset tokenization, NFT standards, marketplace, staking, vesting, and governance mechanisms (ERC-20, ERC-721, ERC-3643, ERC-1400, etc., and custom implementations).",
       "Built and optimized backend services using Node.js and NestJS to handle off-chain data processing, indexing, and synchronization with on-chain state.",
+      "Built and integrated RESTful APIs serving dApp frontends and third-party integrations across the RWA ecosystem.",
       "Integrated Web3 libraries (Ethers.js, Web3.js, Viem) to support wallet connections (MetaMask, WalletConnect) and multi-chain interactions (Ethereum, Base, Arbitrum).",
       "Designed scalable system architecture for DeFi components including staking pools, liquidity management, and yield distribution mechanisms.",
       "Collaborated with product, business, and community teams to launch tokenized asset offerings and onboard real estate partners into the ecosystem.",
@@ -135,6 +136,7 @@ export const experiences: Experience[] = [
       { label: "Web3", value: "Web3.js, Ethers.js, Viem" },
       { label: "Networks", value: "Ethereum, Base, etc." },
       { label: "Audit", value: "Certik, SolidProof / TrustNet" },
+      { label: "Architecture & Tools", value: "REST API, Webhooks, Docker, Subgraph/Indexing" },
     ],
   },
   {
@@ -143,6 +145,7 @@ export const experiences: Experience[] = [
     period: "12/2022 - 10/2025",
     achievements: [
       "Designed and developed end-to-end blockchain applications including smart contracts, backend APIs, and frontend logic.",
+      "Built and integrated RESTful APIs for DeFi, NFT Marketplace, and Launchpad platforms.",
       "Building and developing Launchpad, AMM, Aggregator, DEXs, CLOB, NFT Marketplaces, DeFi platforms, GameFi projects, Paymaster, etc.",
       "Operate and coordinate with the community team to add partner projects in certain streams.",
       "Integrated smart contract logic into frontend (Next.js) and backend (Nest.js).",
@@ -158,6 +161,7 @@ export const experiences: Experience[] = [
       { label: "Database", value: "PostgreSQL" },
       { label: "Web3", value: "Web3.js, Ethers.js" },
       { label: "Networks", value: "Ethereum, Polygon, BSC, Sui, Starknet, Solana, etc." },
+      { label: "Architecture & Tools", value: "REST API, Docker, AWS, Subgraph" },
     ],
   },
   {
@@ -166,8 +170,10 @@ export const experiences: Experience[] = [
     period: "01/2022 - 11/2022",
     achievements: [
       "Developed an NFT Marketplace using Wyvern Protocol and OpenZeppelin, integrating ERC721/ERC1155 contracts with on-chain metadata.",
+      "Designed the system architecture for the NFT Marketplace — on-chain/off-chain data flow, event listeners, and indexing services for order book and metadata synchronization.",
       "Deployed and optimized EVM-compatible smart contracts, built a comprehensive test suite with Hardhat, Solidity, Ethers.js, and TypeScript.",
       "Participated in the development of a DEX platform based on the Uniswap V2 protocol, implementing token swap and liquidity pool management.",
+      "Contributed to system design discussions for DEX components — AMM pricing flow, liquidity pool state management, and transaction handling under high load.",
     ],
     techStack: [
       { label: "Tech Stack", value: "Solidity, OpenZeppelin, Hardhat, Web3.js, Ethers.js, TypeScript" },
@@ -179,13 +185,15 @@ export const experiences: Experience[] = [
     company: "ANEED",
     period: "08/2021 - 12/2022",
     achievements: [
-      "Developed Smart Contracts for prize-winning games.",
-      "Developed Smart Contracts for the SocialFi theme of the VBI Lab Hackathon.",
-      "Researched and participated in Hackathons.",
-      "Top 10 in the VBI Hackathon.",
+      "Designed and developed Smart Contracts for prize-winning game mechanics, covering reward distribution, prize pools, and on-chain game logic.",
+      "Architected and implemented the full Smart Contract layer for a SocialFi product at the VBI Lab Hackathon — token, reward, and social interaction contracts — achieving Top 10.",
+      "Applied OpenZeppelin standards (ERC-20, ERC-721) and security best practices: access control, reentrancy protection, and safe upgrade patterns.",
+      "Built test suites and deployment scripts with Hardhat; optimized contracts for gas efficiency across Ethereum and BSC.",
+      "Researched Smart Contract design patterns, tokenomics models, and emerging protocols through Hackathons and R&D projects.",
     ],
     techStack: [
-      { label: "Tech Stack", value: "Solidity, OpenZeppelin, Hardhat, Web3.js, Ethers.js" },
+      { label: "Smart Contracts", value: "Solidity, OpenZeppelin (ERC-20, ERC-721), design patterns, gas optimization" },
+      { label: "Tooling & Testing", value: "Hardhat, Ethers.js, Web3.js, Mocha/Chai" },
       { label: "Networks", value: "Ethereum, BSC" },
     ],
     links: [
@@ -237,14 +245,14 @@ export const projects: Project[] = [
     keyFeatures: [
       "Autonomous AI agents that build storefronts and operate commerce workflows end-to-end.",
       "Shopify-like merchant/store management platform for products, orders and payment operations.",
-      "Stripe Connect onboarding, payouts and multi-merchant checkout processing.",
+      "Stripe Connect onboarding with merchant KYC/identity verification, payouts and multi-merchant checkout processing.",
       "Event-driven architecture: webhook services and message queues to synchronize orders, payments and stores across services.",
       "RESTful APIs built with Nest.js and FastAPI on PostgreSQL/Redis, shipped with Docker on AWS.",
       "AI-First development workflow with Claude, Cursor and MCP across the codebase.",
     ],
     image: shopQuantum1,
     screenshots: [shopQuantum1, shopQuantum2],
-    tags: ["Nest.js", "FastAPI", "AI Agents", "Stripe Connect"],
+    tags: ["React", "Nest.js", "FastAPI", "AI Agents", "Stripe Connect"],
     team: 10,
     links: [{ label: "shopquantum.ai", url: "https://shopquantum.ai/" }],
   },
@@ -266,7 +274,7 @@ export const projects: Project[] = [
     ],
     image: makezbright1,
     screenshots: [makezbright1, makezbright2],
-    tags: ["Nest.js", "FastAPI", "Message Queue", "Async Processing", "Stripe", "Paypal"],
+    tags: ["React", "Nest.js", "FastAPI", "Message Queue", "Async Processing", "Stripe", "Paypal"],
     team: 10,
     links: [{ label: "makezbrightgifts.com", url: "https://makezbrightgifts.com/" }],
   },
@@ -311,7 +319,7 @@ export const projects: Project[] = [
     ],
     image: meyReal1,
     screenshots: [meyReal1, meyReal2],
-    tags: ["Solidity", "Nest.js", "Base", "RWA", "PTO"],
+    tags: ["React", "Solidity", "Nest.js", "Base", "RWA", "PTO"],
     team: 10,
     links: [
       { label: "meyreal.io", url: "https://meyreal.io/" },
@@ -336,7 +344,7 @@ export const projects: Project[] = [
     ],
     image: meyFi1,
     screenshots: [meyFi1, meyFi2],
-    tags: ["Solidity", "Nest.js", "Base", "DeFi", "Staking"],
+    tags: ["React", "Solidity", "Nest.js", "Base", "DeFi", "Staking"],
     team: 10,
     links: [{ label: "meyfi.io", url: "https://meyfi.io/" }],
   },
