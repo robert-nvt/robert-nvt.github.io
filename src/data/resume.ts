@@ -60,7 +60,7 @@ export const about = {
   ],
   highlightsTitle: "What I Bring",
   highlights: [
-    "4.5+ years building full-stack & blockchain applications",
+    "5+ years building full-stack & blockchain applications",
     "Build and integrate RESTful APIs",
     "System design for high-volume services with message queues (Kafka, RabbitMQ, Redis)",
     "Global payment infrastructure (Stripe, Paypal, Airwallex, Checkout.com)",
@@ -74,7 +74,7 @@ export const about = {
 type Stat = { icon: LucideIcon; label: string; value: string };
 export const stats: Stat[] = [
   { icon: Code2, label: "Featured Projects", value: "10+" },
-  { icon: Boxes, label: "Years Experience", value: "4.5+" },
+  { icon: Boxes, label: "Years Experience", value: "5+" },
   { icon: Server, label: "Companies Worked", value: "6+" },
   { icon: Database, label: "Blockchain Networks", value: "10+" },
 ];
