@@ -3,7 +3,7 @@
 //  Edit your CV information HERE — no need to touch component code.
 //  Extracted from NGUYEN-VIET-TRI-CV.pdf
 // =============================================================
-import { Boxes, Code2, Database, Network, Server, Sparkles, Wallet } from "lucide-react";
+import { Boxes, Cloud, Code2, Database, Network, Server, Sparkles, Wallet } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 import cvFile from "@/files/Nguyen-Viet-Tri-CV.pdf";
@@ -570,13 +570,23 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
+    icon: Cloud,
+    title: "DevOps & Infrastructure",
+    skills: [
+      { name: "CI/CD (GitHub Actions)", level: 85 },
+      { name: "Docker / Docker Compose", level: 85 },
+      { name: "AWS (EC2, S3, RDS)", level: 80 },
+      { name: "Git / GitHub / GitLab", level: 90 },
+    ],
+  },
+  {
     icon: Sparkles,
     title: "AI Engineering & Tools",
     skills: [
       { name: "Claude Code / Codex / Cursor", level: 90 },
       { name: "MCP & AI Agents", level: 85 },
-      { name: "Docker / AWS", level: 85 },
-      { name: "CI/CD & Git", level: 85 },
+      { name: "Prompt Engineering", level: 88 },
+      { name: "AI-First Development Workflow", level: 88 },
     ],
   },
 ];
