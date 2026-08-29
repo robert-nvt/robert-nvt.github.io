@@ -91,28 +91,6 @@ export type Experience = {
 };
 export const experiences: Experience[] = [
   {
-    title: "Fullstack Developer",
-    company: "PENGUIN SECRET AGENCY CO., LTD",
-    period: "10/2025 - 6/2026",
-    achievements: [
-      "Applied AI-First development workflows to accelerate software delivery, debugging, architecture design, and code reviews.",
-      "Developed scalable full-stack commerce and payment infrastructure for AI-driven commerce platforms.",
-      "Integrated global payment systems using Stripe Connect, Authorize.net, Airwallex, and Checkout.com for onboarding, payouts, and checkout processing.",
-      "Built secure checkout, recurring billing, subscription management, and transaction monitoring systems.",
-      "Developed merchant/store management platforms and commerce tools similar to Shopify for orders, products, and payment operations.",
-      "Built and integrated RESTful APIs, webhook services, and event-driven architectures for payment and order synchronization.",
-      "Optimized backend systems for scalability, reliability, and high-volume transaction processing.",
-    ],
-    techStack: [
-      { label: "Frontend", value: "TypeScript, Next.js, React" },
-      { label: "Backend", value: "Node.js, Nest.js, Python (FastAPI), Go" },
-      { label: "Database", value: "PostgreSQL, Redis" },
-      { label: "Payment Infrastructure", value: "Stripe Connect, Paypal, Authorize.net, Airwallex, Checkout.com" },
-      { label: "AI Engineering", value: "Claude, ChatGPT, Cursor, MCP (Model Context Protocol), AI Agents, Prompt Engineering" },
-      { label: "Architecture & Tools", value: "REST API, Webhooks, Docker, AWS, Prisma ORM, GraphQL,Queue Systems, Message Brokers,WebSocket" },
-    ],
-  },
-  {
     title: "FullStack Developer - Blockchain Engineer",
     company: "MEEY GROUP JSC",
     period: "11/2025 - 5/2026",
@@ -140,9 +118,31 @@ export const experiences: Experience[] = [
     ],
   },
   {
+    title: "Fullstack Developer - Contractor",
+    company: "PENGUIN SECRET AGENCY CO., LTD",
+    period: "09/2025 - 03/2026",
+    achievements: [
+      "Applied AI-First development workflows to accelerate software delivery, debugging, architecture design, and code reviews.",
+      "Developed scalable full-stack commerce and payment infrastructure for AI-driven commerce platforms.",
+      "Integrated global payment systems using Stripe Connect, Authorize.net, Airwallex, and Checkout.com for onboarding, payouts, and checkout processing.",
+      "Built secure checkout, recurring billing, subscription management, and transaction monitoring systems.",
+      "Developed merchant/store management platforms and commerce tools similar to Shopify for orders, products, and payment operations.",
+      "Built and integrated RESTful APIs, webhook services, and event-driven architectures for payment and order synchronization.",
+      "Optimized backend systems for scalability, reliability, and high-volume transaction processing.",
+    ],
+    techStack: [
+      { label: "Frontend", value: "TypeScript, Next.js, React" },
+      { label: "Backend", value: "Node.js, Nest.js, Python (FastAPI), Go" },
+      { label: "Database", value: "PostgreSQL, Redis" },
+      { label: "Payment Infrastructure", value: "Stripe Connect, Paypal, Authorize.net, Airwallex, Checkout.com" },
+      { label: "AI Engineering", value: "Claude, ChatGPT, Cursor, MCP (Model Context Protocol), AI Agents, Prompt Engineering" },
+      { label: "Architecture & Tools", value: "REST API, Webhooks, Docker, AWS, Prisma ORM, GraphQL,Queue Systems, Message Brokers,WebSocket" },
+    ],
+  },
+  {
     title: "Blockchain Fullstack Developer",
     company: "FTECH CO., LTD",
-    period: "12/2022 - 10/2025",
+    period: "12/2022 - 09/2025",
     achievements: [
       "Designed and developed end-to-end blockchain applications including smart contracts, backend APIs, and frontend logic.",
       "Built and integrated RESTful APIs for DeFi, NFT Marketplace, and Launchpad platforms.",
