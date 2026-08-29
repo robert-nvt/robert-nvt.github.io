@@ -93,7 +93,7 @@ export const experiences: Experience[] = [
   {
     title: "FullStack Developer - Blockchain Engineer",
     company: "MEEY GROUP JSC",
-    period: "11/2025 - 5/2026",
+    period: "11/2025 - 07/2026",
     achievements: [
       "Designed and developed end-to-end decentralized applications (dApps) within an RWA (Real World Assets) ecosystem, focusing on real estate tokenization (Property Token Offering – PTO).",
       "Developed and maintained smart contracts for core modules including asset tokenization, NFT standards, marketplace, staking, vesting, and governance mechanisms (ERC-20, ERC-721, ERC-3643, ERC-1400, etc., and custom implementations).",
