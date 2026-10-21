@@ -25,6 +25,15 @@ export default {
     const cf = request.cf || {};
 
     const time = new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" });
+
+    // Thiệp cưới Trí & Xoan (wedding_web trên Vercel) dùng chung bot này
+    if (data.site === "wedding") {
+      const text = weddingMessage(data, cf, time);
+      if (!text) return new Response("unknown type", { status: 400, headers: corsHeaders });
+      await sendTelegram(env, text);
+      return new Response("ok", { headers: corsHeaders });
+    }
+
     const lines = [
       "👀 Có người đang xem portfolio!",
       `🕒 ${time}`,
@@ -35,15 +44,50 @@ export default {
       `📱 ${shortUa(data.ua || "")}`,
     ];
 
-    await fetch(`https://api.telegram.org/bot${env.BOT_TOKEN}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: env.CHAT_ID, text: lines.join("\n") }),
-    });
+    await sendTelegram(env, lines.join("\n"));
 
     return new Response("ok", { headers: corsHeaders });
   },
 };
+
+function sendTelegram(env, text) {
+  return fetch(`https://api.telegram.org/bot${env.BOT_TOKEN}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ chat_id: env.CHAT_ID, text }),
+  });
+}
+
+// Tin nhắn cho thiệp cưới: type "visit" (có người mở thiệp) hoặc "wish" (lời chúc mới trên cây lưu bút)
+function weddingMessage(data, cf, time) {
+  const clip = (v, n) => String(v || "").trim().slice(0, n);
+  const invited = clip(data.invited, 80);
+  const where = `🌍 ${cf.city || "?"}, ${cf.country || "?"}`;
+  const device = `📱 ${shortUa(clip(data.ua, 400))}`;
+  if (data.type === "visit") {
+    return [
+      "👀 Có người mở thiệp cưới!",
+      `🕒 ${time}`,
+      invited && `💌 Link của: ${invited}`,
+      where,
+      `🔗 Nguồn: ${clip(data.referrer, 200) || "trực tiếp"}`,
+      `🖥 ${clip(data.screen, 20) || "?"} · ${clip(data.lang, 20) || "?"}`,
+      device,
+    ].filter(Boolean).join("\n");
+  }
+  if (data.type === "wish") {
+    return [
+      "💌 Lời chúc mới trên cây lưu bút!",
+      `👤 ${clip(data.name, 80) || "?"}`,
+      `💬 ${clip(data.msg, 1000) || "?"}`,
+      invited && `🔗 Link của: ${invited}`,
+      `🕒 ${time}`,
+      where,
+      device,
+    ].filter(Boolean).join("\n");
+  }
+  return "";
+}
 
 function shortUa(ua) {
   const os = /Android/i.test(ua) ? "Android"
@@ -51,9 +95,15 @@ function shortUa(ua) {
     : /Windows/i.test(ua) ? "Windows"
     : /Mac OS/i.test(ua) ? "macOS"
     : /Linux/i.test(ua) ? "Linux" : "?";
+  // Mở trong ứng dụng (Zalo, Messenger…) thì ghi tên ứng dụng thay cho trình duyệt
+  const app = /Zalo/i.test(ua) ? "Zalo"
+    : /Messenger|FB_IAB\/MESSENGER/i.test(ua) ? "Messenger"
+    : /FBAN|FBAV|FB_IAB/i.test(ua) ? "Facebook"
+    : /Instagram/i.test(ua) ? "Instagram"
+    : /TikTok|musical_ly/i.test(ua) ? "TikTok" : "";
   const browser = /Edg\//.test(ua) ? "Edge"
-    : /Chrome\//.test(ua) ? "Chrome"
+    : /CriOS|Chrome\//.test(ua) ? "Chrome"
     : /Safari\//.test(ua) ? "Safari"
     : /Firefox\//.test(ua) ? "Firefox" : "?";
-  return `${os} · ${browser}`;
+  return `${os} · ${app || browser}`;
 }
