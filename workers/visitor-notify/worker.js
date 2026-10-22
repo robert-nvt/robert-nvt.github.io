@@ -25,10 +25,14 @@ export default {
     const cf = request.cf || {};
 
     const time = new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" });
+    // IP thật của người xem (Cloudflare gắn sẵn) + nhà mạng, vd "Viettel", "Amazon" (máy chủ/bot)
+    const ip = request.headers.get("CF-Connecting-IP") || "?";
+    const net = `🌐 IP: ${ip}${cf.asOrganization ? " · " + cf.asOrganization : ""}`;
+    const where = `🌍 ${[cf.city, cf.region].filter(Boolean).join(", ") || "?"}, ${cf.country || "?"}`;
 
     // Thiệp cưới Trí & Xoan (wedding_web trên Vercel) dùng chung bot này
     if (data.site === "wedding") {
-      const text = weddingMessage(data, cf, time);
+      const text = weddingMessage(data, time, where, net);
       if (!text) return new Response("unknown type", { status: 400, headers: corsHeaders });
       await sendTelegram(env, text);
       return new Response("ok", { headers: corsHeaders });
@@ -37,7 +41,8 @@ export default {
     const lines = [
       "👀 Có người đang xem portfolio!",
       `🕒 ${time}`,
-      `🌍 ${cf.city || "?"}, ${cf.country || "?"}`,
+      where,
+      net,
       `📄 Trang: ${data.path || "/"}`,
       `🔗 Nguồn: ${data.referrer || "trực tiếp"}`,
       `🖥 ${data.screen || "?"} · ${data.lang || "?"}`,
@@ -59,10 +64,9 @@ function sendTelegram(env, text) {
 }
 
 // Tin nhắn cho thiệp cưới: type "visit" (có người mở thiệp), "rsvp" (xác nhận tham dự + số người), "wish" (lời chúc mới)
-function weddingMessage(data, cf, time) {
+function weddingMessage(data, time, where, net) {
   const clip = (v, n) => String(v || "").trim().slice(0, n);
   const invited = clip(data.invited, 80);
-  const where = `🌍 ${cf.city || "?"}, ${cf.country || "?"}`;
   const device = `📱 ${shortUa(clip(data.ua, 400))}`;
   if (data.type === "visit") {
     return [
@@ -70,6 +74,7 @@ function weddingMessage(data, cf, time) {
       `🕒 ${time}`,
       invited && `💌 Link của: ${invited}`,
       where,
+      net,
       `🔗 Nguồn: ${clip(data.referrer, 200) || "trực tiếp"}`,
       `🖥 ${clip(data.screen, 20) || "?"} · ${clip(data.lang, 20) || "?"}`,
       device,
@@ -85,6 +90,7 @@ function weddingMessage(data, cf, time) {
       invited && `🔗 Link của: ${invited}`,
       `🕒 ${time}`,
       where,
+      net,
       device,
     ].filter(Boolean).join("\n");
   }
@@ -96,6 +102,7 @@ function weddingMessage(data, cf, time) {
       invited && `🔗 Link của: ${invited}`,
       `🕒 ${time}`,
       where,
+      net,
       device,
     ].filter(Boolean).join("\n");
   }
