@@ -58,7 +58,7 @@ function sendTelegram(env, text) {
   });
 }
 
-// Tin nhắn cho thiệp cưới: type "visit" (có người mở thiệp) hoặc "wish" (lời chúc mới trên cây lưu bút)
+// Tin nhắn cho thiệp cưới: type "visit" (có người mở thiệp), "rsvp" (xác nhận tham dự + số người), "wish" (lời chúc mới)
 function weddingMessage(data, cf, time) {
   const clip = (v, n) => String(v || "").trim().slice(0, n);
   const invited = clip(data.invited, 80);
@@ -72,6 +72,19 @@ function weddingMessage(data, cf, time) {
       where,
       `🔗 Nguồn: ${clip(data.referrer, 200) || "trực tiếp"}`,
       `🖥 ${clip(data.screen, 20) || "?"} · ${clip(data.lang, 20) || "?"}`,
+      device,
+    ].filter(Boolean).join("\n");
+  }
+  if (data.type === "rsvp") {
+    const going = data.attend === "yes";
+    const guests = Math.max(0, Math.min(99, parseInt(data.guests, 10) || 0));
+    return [
+      going ? "✅ Xác nhận sẽ tham dự!" : "❌ Báo không tham dự được",
+      `👤 ${clip(data.name, 80) || "?"}`,
+      going && `👥 Số người: ${guests || 1}`,
+      invited && `🔗 Link của: ${invited}`,
+      `🕒 ${time}`,
+      where,
       device,
     ].filter(Boolean).join("\n");
   }
