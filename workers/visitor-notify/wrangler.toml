@@ -1,3 +1,9 @@
 name = "visitor-notify"
 main = "worker.js"
 compatibility_date = "2026-01-01"
+
+# Lời chúc trên cây lưu bút của thiệp cưới (schema.sql)
+[[d1_databases]]
+binding = "DB"
+database_name = "wedding-wishes"
+database_id = "39a82750-71b2-46ac-a25d-d1a1ef5d0b46"
