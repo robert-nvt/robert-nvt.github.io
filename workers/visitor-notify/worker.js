@@ -7,7 +7,7 @@ const ALLOWED_ORIGINS = [
 ];
 
 // Trang được gửi lời chúc (đọc thì ai cũng đọc được, lời chúc vốn công khai)
-const WISH_ORIGIN = /^(https:\/\/trixoan-wedding\.vercel\.app|http:\/\/(localhost|127\.0\.0\.1)(:\d+)?)$/;
+const WISH_ORIGIN = /^(https:\/\/(www\.)?trixoan-wedding\.online|https:\/\/trixoan-wedding\.vercel\.app|http:\/\/(localhost|127\.0\.0\.1)(:\d+)?)$/;
 const WISH_LIMIT = 300;        // số lời chúc mới nhất trả về
 const WISH_RATE = 10;          // mỗi IP tối đa 10 lời chúc trong 10 phút (không thấp hơn: khách cùng Wi-Fi/nhà mạng dùng chung IP)
 const WISH_RATE_MS = 10 * 60 * 1000;
